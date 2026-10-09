@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
+import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.util.TelemetryData;
 
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.controls.bindings;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
@@ -39,8 +41,9 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
         bindings.init(opMode.gamepad1, opMode.gamepad2);
         imu = hwMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
-        this.drive = new Drive(hwMap);
         this.otos = (SparkFunOTOS) hwMap.get("Spark");
+        Follower follower = Constants.create(hwMap);
+        this.drive = new Drive(hwMap, follower);
 
         register(drive);
 
