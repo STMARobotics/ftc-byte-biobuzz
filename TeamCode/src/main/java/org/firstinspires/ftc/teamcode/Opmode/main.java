@@ -36,6 +36,6 @@ public class main extends CommandOpMode {
     public void run() {
         // DO NOT REMOVE ANY LINES BELOW! Runs the command scheduler and updates telemetry
         super.run();
-        telemetryData.update();
+        robot.telemetryData.update();
     }
 }

@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.controls.bindings;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
 
+import javax.xml.transform.Source;
 
 
 public class Robot extends com.seattlesolvers.solverslib.command.Robot {
@@ -48,6 +49,7 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
         register(drive);
 
         if (constants.OP_MODE_TYPE == constants.OpModeType.TELEOP) {
+            System.out.println("MFM ****************  OP MODE TELEOP");
             bindCommands();
         }
 

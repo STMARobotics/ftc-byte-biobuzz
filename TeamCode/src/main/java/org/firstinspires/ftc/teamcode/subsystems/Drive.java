@@ -51,17 +51,17 @@ public class Drive extends SubsystemBase {
         mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
     }
 
-    public void driveFieldCentric(double forward, double strafe, double turn) {
-        this.forward = forward;
-        this.strafe = strafe;
-        this.turn = turn;
-        this.follower.manual(forward, strafe, turn);
-        this.follower.update();
-    }
+//    public void driveFieldCentric(double forward, double strafe, double turn) {
+//        this.forward = forward;
+//        this.strafe = strafe;
+//        this.turn = turn;
+//        this.follower.manual(forward, strafe, turn);
+//        this.follower.update();
+//    }
 
     public void driveRobotCentric(double forward, double strafe, double turn){
-        this.forward = forward;
-        this.strafe = strafe;
+        this.forward = -forward;
+        this.strafe = -strafe;
         this.turn = -turn;
 
 //        DrivePowers powers = ManualDrive.fieldCentric(
@@ -73,20 +73,24 @@ public class Drive extends SubsystemBase {
 
 //        robot.telemetryData.addData("Heading", this.follower.pose().heading());
         robot.telemetryData.addData("Drive - Forward", this.getForward());
+        System.out.println("MFM ***************** Drive Forward " + this.getForward());
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
+        System.out.println("MFM ***************** Drive Strafe " + this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
+        System.out.println("MFM ***************** Drive Turn " + this.getTurn());
+
 //        follower.manual(powers);
 //        follower.update();
 
         System.out.println("MFM **************** in Drive Robot Centric ");
-        mecanumDrive.driveRobotCentric(strafe, forward, turn);
+        mecanumDrive.driveRobotCentric(this.strafe, this.turn, this.forward);
     }
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
     }
 
     public void stop() {
-        this.driveFieldCentric(0,0,0);
+        this.driveRobotCentric(0,0,0);
     }
 
 
