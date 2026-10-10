@@ -39,9 +39,9 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
         this.telemetryData = new TelemetryData(opMode.telemetry);
         HardwareMap hwMap = opMode.hardwareMap;
         bindings.init(opMode.gamepad1, opMode.gamepad2);
-        imu = hwMap.get(IMU.class, "imu");
-        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
-        this.otos = (SparkFunOTOS) hwMap.get("Spark");
+//        imu = hwMap.get(IMU.class, "imu");
+//        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
+//        this.otos = (SparkFunOTOS) hwMap.get("Spark");
         Follower follower = Constants.create(hwMap);
         this.drive = new Drive(hwMap, follower);
 
@@ -55,10 +55,10 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
 
 
     public void bindCommands() {
-        bindings.getDriverOptionKey().whenPressed(
-                new InstantCommand(() -> {
-                    imu.resetYaw();
-                }));
+//        bindings.getDriverOptionKey().whenPressed(
+//                new InstantCommand(() -> {
+//                    imu.resetYaw();
+//                }));
 
         DriverControlCommand dcc = new DriverControlCommand(drive,
                 bindings.getDriverLeftY(),
@@ -67,7 +67,7 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
                 bindings.getDriverRightTrigger()
         );
 
-
+        this.drive.setDefaultCommand(dcc);
 
 
     }

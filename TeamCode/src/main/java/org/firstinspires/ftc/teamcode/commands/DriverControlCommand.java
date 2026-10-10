@@ -30,8 +30,9 @@ public class DriverControlCommand extends CommandBase {
 
     @Override
     public void execute() {
+        System.out.println("MFM *************  Drive Command Execute ");
         double multiplier = -1 * (constants.MINIMUM_SPEED + (1 - constants.MINIMUM_SPEED) * speedModifier.getAsDouble());
-        this.drive.driveFieldCentric( -forward.getAsDouble() * multiplier, strafe.getAsDouble() * multiplier, - turn.getAsDouble() * multiplier);
+        this.drive.driveRobotCentric( -forward.getAsDouble() * multiplier, strafe.getAsDouble() * multiplier, - turn.getAsDouble() * multiplier);
 
     }
 

@@ -7,6 +7,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.ManualDrive;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -16,6 +17,7 @@ public class Drive extends SubsystemBase {
 
     private final Robot robot = Robot.getInstance();
     private final Follower follower;
+    private final MecanumDrive mecanumDrive;
 
     public double getForward() {
         return forward;
@@ -45,6 +47,8 @@ public class Drive extends SubsystemBase {
         this.backLeftMotor = new MotorEx(hwMap, BACK_LEFT_MOTOR);
         this.backRightMotor = new MotorEx(hwMap, BACK_RIGHT_MOTOR);
 
+        this.backRightMotor.setInverted(true);
+        mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
     }
 
     public void driveFieldCentric(double forward, double strafe, double turn) {
@@ -60,19 +64,22 @@ public class Drive extends SubsystemBase {
         this.strafe = strafe;
         this.turn = -turn;
 
-        DrivePowers powers = ManualDrive.fieldCentric(
-                forward,
-                strafe,
-                turn,
-                follower.pose().heading()
-        );
+//        DrivePowers powers = ManualDrive.fieldCentric(
+//                forward,
+//                strafe,
+//                turn,
+//                follower.pose().heading()
+//        );
 
-        robot.telemetryData.addData("Heading", this.follower.pose().heading());
+//        robot.telemetryData.addData("Heading", this.follower.pose().heading());
         robot.telemetryData.addData("Drive - Forward", this.getForward());
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
-        follower.manual(powers);
-        follower.update();
+//        follower.manual(powers);
+//        follower.update();
+
+        System.out.println("MFM **************** in Drive Robot Centric ");
+        mecanumDrive.driveRobotCentric(strafe, forward, turn);
     }
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
