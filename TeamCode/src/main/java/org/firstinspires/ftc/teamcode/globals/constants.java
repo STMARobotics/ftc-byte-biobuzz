@@ -22,5 +22,8 @@ public class constants {
 
     public static final String FLYWHEEL_MOTOR ="FlywheelMotor";
 
+    public static final int LIMELIGHT_POLL_HZ = 90; // check num
+    public static final int BLUE_PIPELINE = 0;
+    public static final int RED_PIPELINE = 1;
 
 }
