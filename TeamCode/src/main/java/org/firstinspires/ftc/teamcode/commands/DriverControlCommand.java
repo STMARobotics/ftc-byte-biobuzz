@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.commands;
 
-import com.qualcomm.robotcore.robocol.Command;
 import com.seattlesolvers.solverslib.command.CommandBase;
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
-import org.firstinspires.ftc.teamcode.globals.constants;
+import org.firstinspires.ftc.teamcode.globals.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 
 import java.util.function.DoubleSupplier;
@@ -30,9 +28,14 @@ public class DriverControlCommand extends CommandBase {
 
     @Override
     public void execute() {
+<<<<<<< HEAD
         System.out.println("MFM *************  Drive Command Execute ");
         double multiplier = -1 * (constants.MINIMUM_SPEED + (1 - constants.MINIMUM_SPEED) * speedModifier.getAsDouble());
         this.drive.driveRobotCentric( -forward.getAsDouble() * multiplier, strafe.getAsDouble() * multiplier, - turn.getAsDouble() * multiplier);
+=======
+        double multiplier = -1 * (Constants.MINIMUM_SPEED + (1 - Constants.MINIMUM_SPEED) * speedModifier.getAsDouble());
+        this.drive.driveFieldCentric( -forward.getAsDouble() * multiplier, strafe.getAsDouble() * multiplier, - turn.getAsDouble() * multiplier);
+>>>>>>> 8ac86a0 (my things for the pedro drive)
 
     }
 

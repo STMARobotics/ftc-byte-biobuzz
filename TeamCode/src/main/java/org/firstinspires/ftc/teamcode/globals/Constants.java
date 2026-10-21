@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.globals;
 
-public class constants {
+public class Constants {
     public enum OpModeType {
         AUTO,
         TELEOP
@@ -19,4 +19,5 @@ public class constants {
     public static final String FRONT_LEFT_MOTOR = "FrontLeftMotor";
     public static final String BACK_LEFT_MOTOR = "BackLeftMotor";
     public static final String BACK_RIGHT_MOTOR = "BackRightMotor";
+us
 }

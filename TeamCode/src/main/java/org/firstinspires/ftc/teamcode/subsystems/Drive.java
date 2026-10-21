@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.globals.constants.*;
+import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
 import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.Follower;
@@ -77,6 +77,7 @@ public class Drive extends SubsystemBase {
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
         System.out.println("MFM ***************** Drive Strafe " + this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
+<<<<<<< HEAD
         System.out.println("MFM ***************** Drive Turn " + this.getTurn());
 
 //        follower.manual(powers);
@@ -84,6 +85,11 @@ public class Drive extends SubsystemBase {
 
         System.out.println("MFM **************** in Drive Robot Centric ");
         mecanumDrive.driveRobotCentric(this.strafe, this.turn, this.forward);
+=======
+        follower.manual(powers);
+        follower.update();
+        
+>>>>>>> 8ac86a0 (my things for the pedro drive)
     }
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
@@ -109,4 +115,5 @@ public class Drive extends SubsystemBase {
     public MotorEx getBackRightMotor() {
         return backRightMotor;
     }
+
 }
