@@ -26,4 +26,10 @@ public class constants {
     public static final int BLUE_PIPELINE = 0;
     public static final int RED_PIPELINE = 1;
 
+    public static final double TURRET_KP = 0.03;
+    public static final double TURRET_KD = 0.001;
+    public static final double TURRET_MAX_POWER = 0.65;
+    public static final double DEAD_BAND_DEG = 3.0; // magic num
+
+
 }
