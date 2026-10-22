@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.teamcode.globals.constants.LIMELIGHT_POLL_HZ;
+
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,7 +12,7 @@ public class Limelight extends SubsystemBase {
 
     public Limelight(HardwareMap hardwareMap){
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.setPollRateHz(LIMELIGHT_POLL_HZ); //will deal with this when i feel like it >:(
+        limelight.setPollRateHz(LIMELIGHT_POLL_HZ); //see i fixed it :)
         limelight.start();
     }
 
