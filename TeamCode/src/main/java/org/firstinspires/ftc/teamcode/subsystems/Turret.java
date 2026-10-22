@@ -20,7 +20,7 @@ private final Limelight limelight;
 
 private double lastAppliedPower = 0.0;//i have no idea what this does yet
 
-private final PIDController pidController = new PIDController(TURRET_KP,0.0,TURRET_KD);//add to constants
+private final PIDController pidController = new PIDController(TURRET_KP,0.0,TURRET_KD);
 
 public Turret(HardwareMap hardwareMap){
     turretMotor = hardwareMap.get(DcMotorEx.class, "turretMotor");
@@ -30,7 +30,7 @@ public Turret(HardwareMap hardwareMap){
     turretMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 }
 public void setTurretPower(double power){
-    lastAppliedPower = MathUtils.clamp(power, -TURRET_MAX_POWER, TURRET_MAX_POWER);// add later
+    lastAppliedPower = MathUtils.clamp(power, -TURRET_MAX_POWER, TURRET_MAX_POWER);
     turretMotor.setPower(lastAppliedPower);
 }
 public void stopTurret(){

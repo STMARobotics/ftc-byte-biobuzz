@@ -12,7 +12,7 @@ public class Limelight extends SubsystemBase {
 
     public Limelight(HardwareMap hardwareMap){
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.setPollRateHz(LIMELIGHT_POLL_HZ); //see i fixed it :)
+        limelight.setPollRateHz(LIMELIGHT_POLL_HZ);
         limelight.start();
     }
 
