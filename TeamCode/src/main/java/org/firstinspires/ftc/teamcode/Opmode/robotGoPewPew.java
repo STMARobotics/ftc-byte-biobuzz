@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.Opmode;
+//yeah this actully sucks
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
