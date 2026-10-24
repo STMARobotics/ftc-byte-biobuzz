@@ -19,7 +19,7 @@ public class Auto extends CommandOpMode {
         super.reset();
         robot.init(this);
         schedule(
-                new AutoSucksAndIHateItCommand(robot.drive,1.0, .5)
+                new AutoSucksAndIHateItCommand(robot.drive,1.5, .5)
         );
     }
 
