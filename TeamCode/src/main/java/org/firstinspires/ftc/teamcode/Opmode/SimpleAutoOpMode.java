@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.globals.Robot;
 import org.firstinspires.ftc.teamcode.globals.Constants;
 
 
-@Autonomous(name="SimpleAuto", preselectTeleOp = "Driver Controlled")
+@Autonomous(name="SimpleAuto", preselectTeleOp = "DriverControlled")
 public class SimpleAutoOpMode extends CommandOpMode {
     private final Robot robot = Robot.getInstance();
     private final long startTime = System.currentTimeMillis();
@@ -18,9 +18,14 @@ public class SimpleAutoOpMode extends CommandOpMode {
         Constants.OP_MODE_TYPE = Constants.OpModeType.AUTO;
         super.reset();
         robot.init(this);
+    }
+
+    @Override
+    public void preRun() {
         schedule(
                 new DriveForwardCommand(robot.drive,1.5, .5)
         );
+        super.preRun();
     }
 
     @Override
