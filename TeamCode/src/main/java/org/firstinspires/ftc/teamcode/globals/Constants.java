@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.globals;
 
-public class constants {
+public class Constants {
     public enum OpModeType {
         AUTO,
         TELEOP
