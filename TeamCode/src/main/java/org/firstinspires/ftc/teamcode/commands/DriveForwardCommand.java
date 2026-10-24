@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
-
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 
-public class AutoSucksAndIHateItCommand extends CommandBase {
+public class DriveForwardCommand extends CommandBase {
     private final Double driveTime;
     private final Drive drive;
     private final Double driveSpeed;
     private long startTimeMillis;
 
-    public AutoSucksAndIHateItCommand(Drive drive, Double driveTime, Double speed) {
+    public DriveForwardCommand(Drive drive, Double driveTime, Double speed) {
         this.drive = drive;
         this.driveTime = driveTime;
         this.driveSpeed = speed;
