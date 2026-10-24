@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.globals;
 
 
 import com.pedropathing.drivetrain.Drivetrain;
+import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -39,28 +40,18 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
         this.telemetryData = new TelemetryData(opMode.telemetry);
         HardwareMap hwMap = opMode.hardwareMap;
         bindings.init(opMode.gamepad1, opMode.gamepad2);
-<<<<<<< HEAD
 //        imu = hwMap.get(IMU.class, "imu");
 //        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
 //        this.otos = (SparkFunOTOS) hwMap.get("Spark");
-        Follower follower = Constants.create(hwMap);
-=======
-        imu = hwMap.get(IMU.class, "imu");
-        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
+//        imu = hwMap.get(IMU.class, "imu");
+//        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
         this.otos = (SparkFunOTOS) hwMap.get("Spark");
-        Drivetrain dt =
         Follower follower = org.firstinspires.ftc.teamcode.pedroPathing.Constants.create(hwMap);
->>>>>>> 8ac86a0 (my things for the pedro drive)
         this.drive = new Drive(hwMap, follower);
 
         register(drive);
 
-<<<<<<< HEAD
-        if (constants.OP_MODE_TYPE == constants.OpModeType.TELEOP) {
-            System.out.println("MFM ****************  OP MODE TELEOP");
-=======
         if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
->>>>>>> 8ac86a0 (my things for the pedro drive)
             bindCommands();
         }
 

@@ -15,16 +15,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
     public static Follower create(HardwareMap h) {
-<<<<<<< HEAD
-//        return new Follower(Drivetrain, Localizer, Foresight);
-        return null;
-=======
+
         return new Follower(
                 new OTOSLocalizer(h, LOCALIZER_CONFIG),
                 new Mecanum(h, DRIVETRAIN_CONFIG),
                 new Foresight(FORESIGHT_CONFIG)
         );
->>>>>>> 8ac86a0 (my things for the pedro drive)
     }
 
     public static MecanumConfig DRIVETRAIN_CONFIG = new MecanumConfig(
