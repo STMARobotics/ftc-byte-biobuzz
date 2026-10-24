@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Opmode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 
-import org.firstinspires.ftc.teamcode.commands.AutoSucksAndIHateItAuto;
+import org.firstinspires.ftc.teamcode.commands.AutoSucksAndIHateItCommand;
 import org.firstinspires.ftc.teamcode.globals.Robot;
 import org.firstinspires.ftc.teamcode.globals.constants;
 
@@ -19,7 +19,7 @@ public class Auto extends CommandOpMode {
         super.reset();
         robot.init(this);
         schedule(
-                new AutoSucksAndIHateItAuto(robot.drive,1.0)
+                new AutoSucksAndIHateItCommand(robot.drive,1.0, .5)
         );
     }
 
