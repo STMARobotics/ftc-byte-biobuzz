@@ -31,5 +31,12 @@ public class constants {
     public static final double TURRET_MAX_POWER = 0.65;// magic num
     public static final double DEAD_BAND_DEG = 3.0; // magic num
 
+    public static final int open = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int closed = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+
+    public static final int onFloor = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int stored = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+
+
 
 }
