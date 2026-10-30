@@ -12,6 +12,6 @@ public class ManualShoot extends CommandBase {
     }
     @Override
     public void execute(){
-        shooter.setRPM(5);
+        shooter.setRPM(6000);
     }
 }
