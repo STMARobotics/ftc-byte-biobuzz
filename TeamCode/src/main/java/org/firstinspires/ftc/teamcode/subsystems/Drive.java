@@ -1,19 +1,21 @@
 package org.firstinspires.ftc.teamcode.subsystems;
-
 import static org.firstinspires.ftc.teamcode.globals.constants.*;
-
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.globals.Robot;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.pedropathing.drivetrain.DrivePowers;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.follower.ManualDrive;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 
 
 public class Drive extends SubsystemBase {
 
     private final Robot robot = Robot.getInstance();
+    private Follower follower;
+    private final MecanumDrive mecanumDrive;
 
     public double getForward() {
         return forward;
@@ -36,11 +38,14 @@ public class Drive extends SubsystemBase {
     private MotorEx backRightMotor;
 
     public Drive(HardwareMap hwMap){
-//        follower = createFollower(hwMap);
+        this.follower = follower;
         this.frontRightMotor = new MotorEx(hwMap, FRONT_RIGHT_MOTOR);
         this.frontLeftMotor = new MotorEx(hwMap, FRONT_LEFT_MOTOR);
         this.backLeftMotor = new MotorEx(hwMap, BACK_LEFT_MOTOR);
         this.backRightMotor = new MotorEx(hwMap, BACK_RIGHT_MOTOR);
+
+        this.backRightMotor.setInverted(true);
+        mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
 
     }
 
@@ -48,6 +53,28 @@ public class Drive extends SubsystemBase {
         this.forward = forward;
         this.strafe = strafe;
         this.turn = turn;
+        this.follower.manual(forward, strafe, turn);
+        this.follower.update();
+    }
+
+    public void driveRobotCentric(double forward, double strafe, double turn) {
+        this.forward = -forward;
+        this.strafe = -strafe;
+        this.turn = -turn;
+
+        DrivePowers  powers = ManualDrive.fieldCentric(
+                forward,
+                strafe,
+                turn,
+                follower.pose().heading()
+        );
+
+        robot.telemetryData.addData("Drive - Forward", this.getForward());
+        robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
+        robot.telemetryData.addData("Drive - Turn", this.getTurn());
+
+        follower.manual(powers);
+        follower.update();
     }
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
