@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.globals;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+
 public class Constants {
     public enum OpModeType {
         AUTO,
@@ -24,6 +26,8 @@ public class Constants {
     public static final String KICKER_SERVO  = "Kicker";
     public static final String TURRET_MOTOR = "Turret";
     public static final String HOOD_SERVO = "Hood";
+    public static final String LIMELIGHT = "Limelight";
+
 
 
 

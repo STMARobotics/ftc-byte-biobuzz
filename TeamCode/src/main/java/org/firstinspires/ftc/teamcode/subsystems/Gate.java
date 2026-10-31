@@ -13,7 +13,7 @@ public class Gate {
     private final Telemetry telemetry;
 
     public Gate(HardwareMap hardwareMap, Telemetry telemetry ){
-        this.gate = new ServoEx(hardwareMap, GATE_SERVO);//pretty sure this should be a constant
+        this.gate = new ServoEx(hardwareMap, GATE_SERVO);
         this.telemetry = telemetry;
     }
 

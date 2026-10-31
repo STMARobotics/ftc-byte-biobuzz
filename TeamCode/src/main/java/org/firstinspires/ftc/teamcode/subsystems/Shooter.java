@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
         return flywheelMotor.getVelocity()/linearDistance*time;
     }
     public void telemetry(Telemetry telemetry){
-        telemetry.addData("Flywheel RPM", flywheelMotor.getVelocity()/linearDistance*time);
+        telemetry.addData("Flywheel RPM", getRPM());
         telemetry.addData("Target RPM", targetRPM);
     }
 
