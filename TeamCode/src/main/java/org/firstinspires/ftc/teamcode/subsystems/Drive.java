@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.globals.Robot;
 
@@ -22,7 +21,6 @@ public class Drive extends SubsystemBase {
     public double getForward() {
         return forward;
     }
-
     public double getStrafe() {
         return strafe;
     }
@@ -59,10 +57,16 @@ public class Drive extends SubsystemBase {
         this.follower.update();
     }
 
-    public void driveRobotCentric(double forward, double strafe, double turn){
+    public void driveRobotCentric(double forward, double strafe, double turn) {
         this.forward = -forward;
         this.strafe = -strafe;
         this.turn = -turn;
+        DrivePowers  powers = ManualDrive.fieldCentric(
+                forward,
+                strafe,
+                turn,
+                follower.pose().heading()
+        );
 
 //        DrivePowers powers = ManualDrive.fieldCentric(
 //                forward,
@@ -76,9 +80,8 @@ public class Drive extends SubsystemBase {
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
 
-//        follower.manual(powers);
-//        follower.update();
-
+        follower.manual(powers);
+        follower.update();
         mecanumDrive.driveRobotCentric(this.strafe, this.turn, this.forward);
     }
     public void telemetry(Telemetry telemetry) {

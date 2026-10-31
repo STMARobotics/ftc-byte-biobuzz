@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
-import static org.firstinspires.ftc.teamcode.globals.Constants.OP_MODE_TYPE;
-import static org.firstinspires.ftc.teamcode.globals.Constants.OpModeType.TELEOP;
-
 import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
