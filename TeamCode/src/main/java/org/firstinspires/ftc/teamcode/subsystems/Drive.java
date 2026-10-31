@@ -73,16 +73,12 @@ public class Drive extends SubsystemBase {
 
 //        robot.telemetryData.addData("Heading", this.follower.pose().heading());
         robot.telemetryData.addData("Drive - Forward", this.getForward());
-        System.out.println("MFM ***************** Drive Forward " + this.getForward());
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
-        System.out.println("MFM ***************** Drive Strafe " + this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
-        System.out.println("MFM ***************** Drive Turn " + this.getTurn());
 
 //        follower.manual(powers);
 //        follower.update();
 
-        System.out.println("MFM **************** in Drive Robot Centric ");
         mecanumDrive.driveRobotCentric(this.strafe, this.turn, this.forward);
     }
     public void telemetry(Telemetry telemetry) {

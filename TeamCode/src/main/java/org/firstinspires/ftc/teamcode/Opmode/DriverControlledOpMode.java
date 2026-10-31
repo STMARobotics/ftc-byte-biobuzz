@@ -10,13 +10,11 @@ import com.seattlesolvers.solverslib.util.TelemetryData;
 import org.firstinspires.ftc.teamcode.globals.Constants;
 import org.firstinspires.ftc.teamcode.globals.Robot;
 
-@TeleOp(name = "Driver Controlled")
-public class main extends CommandOpMode {
+@TeleOp(name = "DriverControlled")
+public class DriverControlledOpMode extends CommandOpMode {
 
     public GamepadEx driverGamepad;
     public GamepadEx operatorGamepad;
-
-    TelemetryData telemetryData = new TelemetryData(telemetry);
 
     private final Robot robot = Robot.getInstance();
 

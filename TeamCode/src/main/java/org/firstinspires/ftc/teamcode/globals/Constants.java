@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.globals;
 
-import com.qualcomm.hardware.limelightvision.Limelight3A;
-
 public class Constants {
     public enum OpModeType {
         AUTO,
