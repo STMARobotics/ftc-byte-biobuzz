@@ -36,6 +36,8 @@ public class constants {
     public static final double TURRET_KD = 0.000;// made up num
     public static final double TURRET_MAX_POWER = 0.60;// made up num
     public static final double DEAD_BAND_DEG = 3.0; // made up num
+    public static final int TURRET_HOME =  0;//made up num
+    public static final int HOOD_HOME = 0;//made up num,
 
 //  Gate constants
     public static final String GATE_SERVO = "Gate";

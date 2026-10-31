@@ -38,7 +38,11 @@ public void stopTurret(){
     turretMotor.setPower(0);
 }
 public void goToHome(){
-    turretMotor.
+    turretMotor.setTargetPosition(TURRET_HOME);
+    setTurretPower(2);//figure out later
+    if (turretMotor.getCurrentPosition()== turretMotor.getTargetPosition()){
+        stopTurret();
+    }
 }
 public  void autoLockTurret(){
     double error = limelight.getTargetOffset();
@@ -61,7 +65,7 @@ public boolean isLockedOn(){
 }
 
 public void hoodToHome(){
-    hoodServo.setPosition(0.25);//random num
+    hoodServo.setPosition(HOOD_HOME);//random num
 }
 public void telemetry(Telemetry telemetry){
     telemetry.addData("Turret Applied Power", lastAppliedPower);
