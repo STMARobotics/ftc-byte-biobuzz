@@ -21,7 +21,7 @@ public class Shooter extends SubsystemBase {
         flywheelMotor.setPower(0);
         targetRPM =0;
     }
-    public boolean flywheelReady(){
+    public boolean isFlywheelReady(){
         return  Math.abs(getRPM() - targetRPM) <= 75;//check this num
     }
     public double getRPM(){

@@ -39,12 +39,13 @@ public class constants {
 
 //  Gate constants
     public static final String GATE_SERVO = "Gate";
-    public static final int open = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
-    public static final int closed = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int GATE_OPEN = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int GATE_CLOSED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
 //   kicker constants
-    public static final int onFloor = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
-    public static final int stored = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+     public static final String KICKER_SERVO  = "Kicker";
+    public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
 
 

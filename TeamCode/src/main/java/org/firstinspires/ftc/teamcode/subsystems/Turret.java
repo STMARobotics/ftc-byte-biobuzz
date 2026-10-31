@@ -38,7 +38,7 @@ public void stopTurret(){
     turretMotor.setPower(0);
 }
 public void goToHome(){
-    //figure out why you exist
+    turretMotor.
 }
 public  void autoLockTurret(){
     double error = limelight.getTargetOffset();

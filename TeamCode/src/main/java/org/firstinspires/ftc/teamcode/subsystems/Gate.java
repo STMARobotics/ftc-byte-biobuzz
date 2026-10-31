@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static org.firstinspires.ftc.teamcode.globals.constants.*;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 
@@ -17,10 +16,11 @@ public class Gate {
         this.gate = new ServoEx(hardwareMap, GATE_SERVO);//pretty sure this should be a constant
         this.telemetry = telemetry;
     }
-    public void openGate(){
-        gate.setPosition(open);//add value to constants later
+
+    public void open(){
+        gate.set(GATE_OPEN);//add value to constants later
     }
-    public void closeGate(){
-        gate.setPosition(closed);//add value to constants later
+    public void close(){
+        gate.set(GATE_CLOSED);//add value to constants later
     }
 }
