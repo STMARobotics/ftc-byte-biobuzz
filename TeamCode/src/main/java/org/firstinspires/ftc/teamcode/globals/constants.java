@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.globals;
 
+import com.qualcomm.robotcore.hardware.Servo;
+
 public class constants {
     public enum OpModeType {
         AUTO,
@@ -15,25 +17,32 @@ public class constants {
     public static final double MINIMUM_SPEED = 0.5;
 
     // Hardware Names
+    //drive subsystem
     public static final String FRONT_RIGHT_MOTOR = "FrontRightMotor";
     public static final String FRONT_LEFT_MOTOR = "FrontLeftMotor";
     public static final String BACK_LEFT_MOTOR = "BackLeftMotor";
     public static final String BACK_RIGHT_MOTOR = "BackRightMotor";
 
+//    shooter constants
     public static final String FLYWHEEL_MOTOR ="FlywheelMotor";
 
+//    limelight constants
     public static final int LIMELIGHT_POLL_HZ = 90; // check num
     public static final int BLUE_PIPELINE = 0;
     public static final int RED_PIPELINE = 1;
 
-    public static final double TURRET_KP = 0.03;// magic num
-    public static final double TURRET_KD = 0.001;// magic num
-    public static final double TURRET_MAX_POWER = 0.65;// magic num
-    public static final double DEAD_BAND_DEG = 3.0; // magic num
+//    turret constants
+    public static final double TURRET_KP = 0.00;// made up num
+    public static final double TURRET_KD = 0.000;// made up num
+    public static final double TURRET_MAX_POWER = 0.60;// made up num
+    public static final double DEAD_BAND_DEG = 3.0; // made up num
 
+//  Gate constants
+    public static final String GATE_SERVO = "Gate";
     public static final int open = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int closed = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
+//   kicker constants
     public static final int onFloor = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int stored = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
