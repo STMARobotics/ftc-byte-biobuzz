@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
+import static org.firstinspires.ftc.teamcode.globals.Constants.OP_MODE_TYPE;
+import static org.firstinspires.ftc.teamcode.globals.Constants.OpModeType.TELEOP;
+
 import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -8,8 +11,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.seattlesolvers.solverslib.util.TelemetryData;
 
-import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.controls.Bindings;
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
 
 
@@ -65,7 +68,6 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
         );
 
         this.drive.setDefaultCommand(dcc);
-
 
     }
 }

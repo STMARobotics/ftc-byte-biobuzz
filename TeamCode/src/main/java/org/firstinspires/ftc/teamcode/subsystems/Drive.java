@@ -51,13 +51,13 @@ public class Drive extends SubsystemBase {
         mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
     }
 
-//    public void driveFieldCentric(double forward, double strafe, double turn) {
-//        this.forward = forward;
-//        this.strafe = strafe;
-//        this.turn = turn;
-//        this.follower.manual(forward, strafe, turn);
-//        this.follower.update();
-//    }
+    public void driveFieldCentric(double forward, double strafe, double turn) {
+        this.forward = forward;
+        this.strafe = strafe;
+        this.turn = turn;
+        this.follower.manual(forward, strafe, turn);
+        this.follower.update();
+    }
 
     public void driveRobotCentric(double forward, double strafe, double turn){
         this.forward = -forward;
