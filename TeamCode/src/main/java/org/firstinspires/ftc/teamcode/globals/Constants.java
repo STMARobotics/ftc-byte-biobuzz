@@ -25,9 +25,7 @@ public class Constants {
     public static final String TURRET_MOTOR = "Turret";
     public static final String HOOD_SERVO = "Hood";
     public static final String LIMELIGHT = "Limelight";
-
-
-
+    public static final String INTAKE_MOTOR= "IntakeMotor";
 
 
     //    limelight constants
@@ -50,7 +48,9 @@ public class Constants {
 //   kicker constants
     public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
-
+//intake
+    public static final double INTAKE_SPEED =1;//rand num
+    public static final double INTAKE_STOP = 0;
 
 
  //math
