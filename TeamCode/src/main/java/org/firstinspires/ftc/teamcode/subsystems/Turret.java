@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.globals.constants.*;
+import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
 import androidx.core.math.MathUtils;
 
@@ -10,12 +10,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.controller.PIDController;
+import com.seattlesolvers.solverslib.hardware.motors.Motor;
+import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
+import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Turret extends SubsystemBase {
-private final DcMotorEx turretMotor;
-private final Servo hoodServo;
+private final MotorEx turretMotor;
+private final ServoEx hoodServo;
 private final Limelight limelight;
 
 private double lastAppliedPower = 0.0;//i have no idea what this does yet
@@ -23,24 +26,26 @@ private double lastAppliedPower = 0.0;//i have no idea what this does yet
 private final PIDController pidController = new PIDController(TURRET_KP,0.0,TURRET_KD);
 
 public Turret(HardwareMap hardwareMap){
-    turretMotor = hardwareMap.get(DcMotorEx.class, "turretMotor");
-    hoodServo = hardwareMap.get(Servo.class, "hoodServo");
+    this.turretMotor = new MotorEx(hardwareMap, TURRET_MOTOR);
+    this.hoodServo = new ServoEx(hardwareMap, HOOD_SERVO);
+
+
     limelight = new Limelight(hardwareMap);
 
-    turretMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    turretMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 }
 public void setTurretPower(double power){
     lastAppliedPower = MathUtils.clamp(power, -TURRET_MAX_POWER, TURRET_MAX_POWER);
-    turretMotor.setPower(lastAppliedPower);
+    turretMotor.set(lastAppliedPower);
 }
 public void stopTurret(){
     lastAppliedPower = 0.0;
-    turretMotor.setPower(0);
+    turretMotor.set(0);
 }
 public void goToHome(){
     turretMotor.setTargetPosition(TURRET_HOME);
     setTurretPower(2);//figure out later
-    if (turretMotor.getCurrentPosition()== turretMotor.getTargetPosition()){
+    if (turretMotor.atTargetPosition()){
         stopTurret();
     }
 }
@@ -65,10 +70,10 @@ public boolean isLockedOn(){
 }
 
 public void hoodToHome(){
-    hoodServo.setPosition(HOOD_HOME);//random num
+    hoodServo.set(HOOD_HOME);//random num
 }
 public void telemetry(Telemetry telemetry){
     telemetry.addData("Turret Applied Power", lastAppliedPower);
-    telemetry.addData("Hood Servo Position", hoodServo.getPosition());
+    telemetry.addData("Hood Servo Position", hoodServo.getRawPosition());
 }
 }

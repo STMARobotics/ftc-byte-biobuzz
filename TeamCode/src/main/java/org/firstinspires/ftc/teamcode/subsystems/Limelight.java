@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.globals.constants.LIMELIGHT_POLL_HZ;
+import static org.firstinspires.ftc.teamcode.globals.Constants.LIMELIGHT_POLL_HZ;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;

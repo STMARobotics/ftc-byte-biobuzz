@@ -44,7 +44,7 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
 
         register(drive);
 
-        if (constants.OP_MODE_TYPE == constants.OpModeType.TELEOP) {
+        if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
             bindCommands();
         }
 
