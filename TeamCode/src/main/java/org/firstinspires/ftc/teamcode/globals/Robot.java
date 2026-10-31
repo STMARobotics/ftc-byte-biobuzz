@@ -64,8 +64,5 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
                 bindings.getDriverRightTrigger()
         );
 
-
-
-
     }
 }
