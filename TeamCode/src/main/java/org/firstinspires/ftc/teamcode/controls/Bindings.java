@@ -8,19 +8,19 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import java.util.function.DoubleSupplier;
 
-public class bindings {
+public class Bindings {
 
     GamepadEx driverGamepad;
     GamepadEx operatorGamepad;
 
-    private static org.firstinspires.ftc.teamcode.controls.bindings INSTANCE;
+    private static Bindings INSTANCE;
 
     public static void init(Gamepad driverGamepad, Gamepad operatorGamepad) {
         if (INSTANCE == null) {
-            INSTANCE = new org.firstinspires.ftc.teamcode.controls.bindings(new GamepadEx(driverGamepad), new GamepadEx(operatorGamepad));
+            INSTANCE = new Bindings(new GamepadEx(driverGamepad), new GamepadEx(operatorGamepad));
         }
     }
-    private bindings(GamepadEx driverGamepad, GamepadEx operatorGamepad) {
+    private Bindings(GamepadEx driverGamepad, GamepadEx operatorGamepad) {
         this.driverGamepad = driverGamepad;
         this.operatorGamepad = operatorGamepad;
     }

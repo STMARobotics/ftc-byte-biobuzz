@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
-import static org.firstinspires.ftc.teamcode.globals.constants.*;
-
 import com.pedropathing.algorithm.Algorithm;
 import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.algorithm.ForesightConfig;
@@ -9,17 +7,17 @@ import com.pedropathing.controllers.Controller;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Localizer;
 import com.pedropathing.math.Matrix;
+import com.pedropathing.math.Pose;
 import com.pedropathing.math.Vector2D;
 import com.pedropathing.drivetrain.Drivetrain;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.OTOSConfig;
 import com.pedropathing.revhub.localizers.OTOSLocalizer;
-import com.pedropathing.revhub.localizers.PinpointConfig;
-import com.pedropathing.revhub.localizers.PinpointLocalizer;
-import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Constants {
 // create that takes the robots hardware.
@@ -38,16 +36,15 @@ public class Constants {
     public static MecanumConfig DRIVETRAIN_CONFIG = new MecanumConfig(
             c -> {
                 c.frontLeftName.set("FrontLeftMotor");
-                c.backLeftName.set("BackLeftMotor");
                 c.frontRightName.set("FrontRightMotor");
+                c.backLeftName.set("BackLeftMotor");
                 c.backRightName.set("BackRightMotor");
                 c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+                c.frontRightDirection.set(DcMotorSimple.Direction.REVERSE);
                 c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-                c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
                 c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
-                c.manualBrakeMode.set(true);
             }
-    );
+            );
 
     /**
      * Pedro Pathing config. It is also all tune and just need to be merged and replace with Mollie's code
@@ -55,8 +52,14 @@ public class Constants {
     public static OTOSConfig LOCALIZER_CONFIG = new OTOSConfig(
             c -> {
                 c.name.set("pinpoint");
-            }
-    );
+                c.name.set("otos");
+                c.linearScalar.set(15.91663171314741);
+                c.angularScalar.set(0.9523809523809507);
+                c.offset.set(new Pose(-0.7088728777066929, -0.480591781496063));
+                 c.linearUnit.set(DistanceUnit.INCH);
+    }
+);
+
 
     /**
      * Pedro Pathing foresight config that hasnt been tuned at all.
@@ -117,5 +120,3 @@ public class Constants {
         return new Follower(createLocalizer(hardwareMap), createDrivetrain(hardwareMap), createAlgorithm());
     }
 }
-
-
