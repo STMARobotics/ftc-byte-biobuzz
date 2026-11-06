@@ -26,7 +26,7 @@ public class DriveForwardCommand extends CommandBase {
 
     @Override
     public void execute() {
-        this.drive.driveRobotCentric(this.driveSpeed, 0,0);
+        this.drive.driveFieldCentric(driveSpeed,0,0);
     }
 
     @Override

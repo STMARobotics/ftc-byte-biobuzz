@@ -75,7 +75,7 @@ public class Drive extends SubsystemBase {
 //                follower.pose().heading()
 //        );
 
-//        robot.telemetryData.addData("Heading", this.follower.pose().heading());
+        robot.telemetryData.addData("Heading", this.follower.pose().heading());
         robot.telemetryData.addData("Drive - Forward", this.getForward());
         robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
         robot.telemetryData.addData("Drive - Turn", this.getTurn());
@@ -89,7 +89,7 @@ public class Drive extends SubsystemBase {
     }
 
     public void stop() {
-        this.driveRobotCentric(0,0,0);
+        this.driveFieldCentric(0,0,0);
     }
 
 
