@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.globals;
 
-
-import com.pedropathing.drivetrain.Drivetrain;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -10,9 +8,13 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.util.TelemetryData;
 
-import org.firstinspires.ftc.teamcode.subsystems.Drive;
-import org.firstinspires.ftc.teamcode.controls.bindings;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
+import org.firstinspires.ftc.teamcode.commands.IntakeInCommand;
+import org.firstinspires.ftc.teamcode.commands.IntakeStopCommand;
+import org.firstinspires.ftc.teamcode.commands.IntakeVomitCommand;
+import org.firstinspires.ftc.teamcode.controls.bindings;
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
 
 
 
@@ -27,6 +29,8 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
     // Subsystems
     public Drive drive;
     public SparkFunOTOS otos;
+
+    public Intake intake;
 
 
     public static Robot getInstance() {
@@ -65,7 +69,12 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
                 bindings.getDriverRightTrigger()
         );
 
+        this.drive.setDefaultCommand(dcc);
 
+    bindings.getDriverRightBumper().whenPressed(new IntakeInCommand());
+    bindings.getDriverRightBumper().whenInactive(new IntakeStopCommand());
+    bindings.getDriverLeftBumper().whenPressed(new IntakeVomitCommand(intake));
+    bindings.getDriverLeftBumper().whenInactive(new IntakeStopCommand());
 
 
     }

@@ -22,7 +22,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
-
+// create that takes the robots hardware.
     public static Follower create(HardwareMap h){
         return new Follower(
                 new OTOSLocalizer(h, LOCALIZER_CONFIG),
@@ -32,7 +32,9 @@ public class Constants {
         );
     }
 
-    // Drivtrain Constants and they need to match what the motor names are.
+    /**
+     * Pedro Pathing Mecanum config. It is all tuned but need to be merged and replace with Mollie's code.
+     */
     public static MecanumConfig DRIVETRAIN_CONFIG = new MecanumConfig(
             c -> {
                 c.frontLeftName.set("FrontLeftMotor");
@@ -47,14 +49,18 @@ public class Constants {
             }
     );
 
-    // The Localizer Constants
+    /**
+     * Pedro Pathing config. It is also all tune and just need to be merged and replace with Mollie's code
+     */
     public static OTOSConfig LOCALIZER_CONFIG = new OTOSConfig(
             c -> {
                 c.name.set("pinpoint");
             }
     );
 
-    // Foresight(Algorithm) Constants
+    /**
+     * Pedro Pathing foresight config that hasnt been tuned at all.
+     */
     public static ForesightConfig FORESIGHT_CONFIG = new ForesightConfig(
             c -> {
                 Controller primaryTranslationalForward = Controller.proportional(0.3);
@@ -76,18 +82,37 @@ public class Constants {
             }
     );
 
+    /**
+     * Creates and initialized a new Drivetrain instance for the Mecanum drive.
+     * @param hardware
+     * @return
+     */
     public static Drivetrain createDrivetrain(HardwareMap hardware ) {
         return new Mecanum(hardware, DRIVETRAIN_CONFIG);
     }
 
+    /**
+     *Create and initializes a new position-tracking system (Localizer)
+     * @param hardwareMap
+     * @return
+     */
     public static Localizer createLocalizer(HardwareMap hardwareMap) {
         return new OTOSLocalizer(hardwareMap, LOCALIZER_CONFIG);
     }
 
+    /**
+     *Creates and initializes a specific type of Algorithm
+     * @return
+     */
     public static Algorithm createAlgorithm() {
         return new Foresight(FORESIGHT_CONFIG);
     }
 
+    /**
+     *Create and initializes a followe for the otos.
+     * @param hardwareMap
+     * @return
+     */
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new Follower(createLocalizer(hardwareMap), createDrivetrain(hardwareMap), createAlgorithm());
     }

@@ -12,26 +12,42 @@ import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 
 
 public class Drive extends SubsystemBase {
-
+    /**
+     * Drivetrain subsystem. Encapsulates the details of how the drivetrain works.
+     */
     private final Robot robot = Robot.getInstance();
     private Follower follower;
     private final MecanumDrive mecanumDrive;
 
+    /**
+     * Allows robot to go forward
+     * @return
+     */
     public double getForward() {
         return forward;
     }
+
+    /**
+     * Allows robot to strafe
+     * @return
+     */
     public double getStrafe() {
         return strafe;
     }
 
+    /**
+     * Allows the robot to turn
+     * @return
+     */
     public double getTurn() {
         return turn;
     }
-
+    // Store the movements inputs
     private double forward;
     private double strafe;
     private double turn;
 
+    //Declare the four motors used to control mecanum or omnidirection
     private MotorEx frontRightMotor;
     private MotorEx frontLeftMotor;
     private MotorEx backLeftMotor;
@@ -49,6 +65,12 @@ public class Drive extends SubsystemBase {
 
     }
 
+    /**
+     * Controls the robot using field-centric driving mechanics
+     * @param forward
+     * @param strafe
+     * @param turn
+     */
     public void driveFieldCentric(double forward, double strafe, double turn) {
         this.forward = forward;
         this.strafe = strafe;
@@ -57,6 +79,12 @@ public class Drive extends SubsystemBase {
         this.follower.update();
     }
 
+    /**
+     * Drive the robot centric manner
+     * @param forward
+     * @param strafe
+     * @param turn
+     */
     public void driveRobotCentric(double forward, double strafe, double turn) {
         this.forward = -forward;
         this.strafe = -strafe;
@@ -76,27 +104,50 @@ public class Drive extends SubsystemBase {
         follower.manual(powers);
         follower.update();
     }
+
+    /**
+     * Add drivetrain telemetry data
+     * @param telemetry
+     */
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
     }
 
+    /**
+     * Stops the drivetrain
+     */
     public void stop() {
         this.driveFieldCentric(0,0,0);
     }
 
-
+    /**
+     * Gets the front right motor of the robot
+     * @return
+     */
     public MotorEx getFrontRightMotor() {
         return frontRightMotor;
     }
 
+    /**
+     * Gets the front left motor of the robot
+     * @return
+     */
     public MotorEx getFrontLeftMotor() {
         return frontLeftMotor;
     }
 
+    /**
+     * Gets the back left motor of the robot
+     * @return
+     */
     public MotorEx getBackLeftMotor() {
         return backLeftMotor;
     }
 
+    /**
+     * Gets the back right motor of the robot
+     * @return
+     */
     public MotorEx getBackRightMotor() {
         return backRightMotor;
     }
