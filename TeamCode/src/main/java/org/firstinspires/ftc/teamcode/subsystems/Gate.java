@@ -3,12 +3,13 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Gate {
+public class Gate extends SubsystemBase {
     private final ServoEx gate; //double check is the right servo
     private final Telemetry telemetry;
 
