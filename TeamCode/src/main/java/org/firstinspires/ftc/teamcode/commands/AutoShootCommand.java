@@ -23,8 +23,9 @@ public class AutoShootCommand extends CommandBase {
             }
     @Override
     public void initialize(){
-                //init
         //  tell distance
+        limelight.getTargetOffset();
+
         //  Shooter looks up speed and hood
         //
         //  set turret offset

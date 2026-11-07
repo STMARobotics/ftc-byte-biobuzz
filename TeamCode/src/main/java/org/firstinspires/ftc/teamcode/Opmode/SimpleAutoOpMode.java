@@ -23,7 +23,7 @@ public class SimpleAutoOpMode extends CommandOpMode {
     @Override
     public void preRun() {
         schedule(
-                new DriveForwardCommand(robot.drive,1.5, .5)
+                new DriveForwardCommand(robot.drive,1.25, .5)
         );
         super.preRun();
     }

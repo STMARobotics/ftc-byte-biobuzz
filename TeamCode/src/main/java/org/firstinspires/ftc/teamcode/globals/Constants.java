@@ -1,6 +1,15 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 public class Constants {
+//    public static final LookupTableMath INTERPOLATOR = new LookupTableMath()
+//            .addEntry(2.16, 3300, .61)
+//            .addEntry(-0.25, 3300, .64)
+//            .addEntry(-2.2, 3300, .625)
+//            .addEntry(-5.0, 3400, .64)
+//            .addEntry(-8.54, 3600, .62)
+//            .addEntry(-12.7, 4200, .70)
+//            .addEntry(-13.2, 4300, .74);
+
     public enum OpModeType {
         AUTO,
         TELEOP
@@ -42,12 +51,12 @@ public class Constants {
     public static final int HOOD_HOME = 0;//made up num,
 
 //  Gate constants
-    public static final int GATE_OPEN = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
-    public static final int GATE_CLOSED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int GATE_OPEN = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETELY MADE UP
+    public static final int GATE_CLOSED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETELY MADE UP
 
 //   kicker constants
-    public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
-    public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
+    public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETELY MADE UP
+    public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETELY MADE UP
 //intake
     public static final double INTAKE_SPEED =1;//rand num
     public static final double INTAKE_STOP = 0;
