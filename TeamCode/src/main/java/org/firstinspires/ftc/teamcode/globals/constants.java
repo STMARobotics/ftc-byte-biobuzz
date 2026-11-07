@@ -49,6 +49,9 @@ public class Constants {
     public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
+    public static final int INTAKE_SPEED =1; // Random number
+    public static final int INTAKE_STOP =0;
+
 
 
  //math

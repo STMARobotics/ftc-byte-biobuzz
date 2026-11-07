@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.teamcode.globals.Constants.*;
+
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -13,7 +15,7 @@ public class Intake extends SubsystemBase {
      * @param hardwareMap
      */
     public Intake (HardwareMap hardwareMap) {
-        intake = new Motor(hardwareMap, "INTAKE_MOTOR");
+        intake = new Motor(hardwareMap, INTAKE_MOTOR);
         intake.setInverted(true);
 
     }

@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.seattlesolvers.solverslib.util.TelemetryData;
 
+import org.firstinspires.ftc.teamcode.commands.KickerDownCommand;
+import org.firstinspires.ftc.teamcode.commands.KickerUpCommand;
 import org.firstinspires.ftc.teamcode.controls.Bindings;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
@@ -79,6 +81,8 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
     Bindings.getDriverRightBumper().whenInactive(new IntakeStopCommand());
     Bindings.getDriverLeftBumper().whenPressed(new IntakeVomitCommand(intake));
     Bindings.getDriverLeftBumper().whenInactive(new IntakeStopCommand());
+    Bindings.getOperatorButtonA().whenPressed( new KickerUpCommand());
+    Bindings.getOperatorButtonA().whenInactive(new KickerDownCommand());
 
 
     }
