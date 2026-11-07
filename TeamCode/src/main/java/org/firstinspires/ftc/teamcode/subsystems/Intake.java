@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 // Give the intake the motor that powers it 
 public class Intake extends SubsystemBase {
+    private static final double INTAKE_SPEED =0;
+    private static final double INTAKE_STOP = 0;
     private final Motor intake;
     public Intake (HardwareMap hardwareMap) {
         intake = new Motor(hardwareMap, "INTAKE_MOTOR");
