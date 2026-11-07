@@ -89,7 +89,7 @@ public class Drive extends SubsystemBase {
     }
 
     public void stop() {
-        this.driveFieldCentric(0,0,0);
+        this.driveRobotCentric(0,0,0);
     }
 
 
