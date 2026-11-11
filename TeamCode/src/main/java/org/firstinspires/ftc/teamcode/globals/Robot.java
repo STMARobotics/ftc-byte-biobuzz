@@ -1,29 +1,34 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
+import static com.pedropathing.ivy.commands.Commands.instant;
+
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
-import com.seattlesolvers.solverslib.util.TelemetryData;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.controls.Bindings;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
 
 
-public class Robot extends com.seattlesolvers.solverslib.command.Robot {
+public class Robot {
 
     // Components
     public IMU imu;
 
     private static final Robot instance = new Robot();
-    public TelemetryData telemetryData;
+    public Telemetry telemetry;
 
     // Subsystems
     public Drive drive;
     public SparkFunOTOS otos;
+    private Intake intake;
 
 
     public static Robot getInstance() {
@@ -31,8 +36,7 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
     }
 
     public void init(OpMode opMode) {
-        reset();
-        this.telemetryData = new TelemetryData(opMode.telemetry);
+        this.telemetry = opMode.telemetry;
         HardwareMap hwMap = opMode.hardwareMap;
         Bindings.init(opMode.gamepad1, opMode.gamepad2);
 //        imu = hwMap.get(IMU.class, "imu");
@@ -40,13 +44,13 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
 //        this.otos = (SparkFunOTOS) hwMap.get("Spark");
         Follower follower = org.firstinspires.ftc.teamcode.pedroPathing.Constants.create(hwMap);
         this.drive = new Drive(hwMap, follower);
-
-        register(drive);
+        this.intake = new Intake(hwMap);
 
         if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
-            System.out.println("MFM ****************  OP MODE TELEOP");
             bindCommands();
         }
+
+        Scheduler.schedule(drive.periodic());
 
     }
 
@@ -64,7 +68,9 @@ public class Robot extends com.seattlesolvers.solverslib.command.Robot {
                 Bindings.getDriverRightTrigger()
         );
 
-        this.drive.setDefaultCommand(dcc);
+
+        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.runIntake());
+        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.stopIntake());
 
     }
 }

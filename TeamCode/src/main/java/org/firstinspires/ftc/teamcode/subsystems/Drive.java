@@ -2,21 +2,22 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
-import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.follower.ManualDrive;
+import com.pedropathing.ivy.Command;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.seattlesolvers.solverslib.command.SubsystemBase;
-import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
-import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.controls.Bindings;
+import org.firstinspires.ftc.teamcode.globals.Constants;
 import org.firstinspires.ftc.teamcode.globals.Robot;
 
-public class Drive extends SubsystemBase {
+import java.util.function.DoubleSupplier;
+
+public class Drive  {
 
     private final Robot robot = Robot.getInstance();
     private final Follower follower;
-    private final MecanumDrive mecanumDrive;
 
     public double getForward() {
         return forward;
@@ -33,56 +34,26 @@ public class Drive extends SubsystemBase {
     private double strafe;
     private double turn;
 
-    private MotorEx frontRightMotor;
-    private MotorEx frontLeftMotor;
-    private MotorEx backLeftMotor;
-    private MotorEx backRightMotor;
+    private DcMotorEx frontRightMotor;
+    private DcMotorEx frontLeftMotor;
+    private DcMotorEx backLeftMotor;
+    private DcMotorEx backRightMotor;
 
     public Drive(HardwareMap hwMap, Follower follower){
         this.follower = follower;
-        this.frontRightMotor = new MotorEx(hwMap, FRONT_RIGHT_MOTOR);
-        this.frontLeftMotor = new MotorEx(hwMap, FRONT_LEFT_MOTOR);
-        this.backLeftMotor = new MotorEx(hwMap, BACK_LEFT_MOTOR);
-        this.backRightMotor = new MotorEx(hwMap, BACK_RIGHT_MOTOR);
-
-        this.backRightMotor.setInverted(true);
-        mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
-    }
-
-    public void driveFieldCentric(double forward, double strafe, double turn) {
-        this.forward = forward;
-        this.strafe = strafe;
-        this.turn = turn;
-        this.follower.manual(forward, strafe, turn);
-        this.follower.update();
+        this.frontRightMotor = hwMap.get(DcMotorEx.class, FRONT_RIGHT_MOTOR);
+        this.frontLeftMotor = hwMap.get(DcMotorEx.class, FRONT_LEFT_MOTOR);
+        this.backLeftMotor = hwMap.get(DcMotorEx.class, BACK_LEFT_MOTOR);
+        this.backRightMotor = hwMap.get(DcMotorEx.class, BACK_RIGHT_MOTOR);
     }
 
     public void driveRobotCentric(double forward, double strafe, double turn) {
-        this.forward = -forward;
-        this.strafe = -strafe;
-        this.turn = -turn;
-        DrivePowers  powers = ManualDrive.fieldCentric(
-                forward,
-                strafe,
-                turn,
-                follower.pose().heading()
-        );
+        this.forward = forward;
+        this.strafe = strafe;
+        this.turn = turn;
 
-//        DrivePowers powers = ManualDrive.fieldCentric(
-//                forward,
-//                strafe,
-//                turn,
-//                follower.pose().heading()
-//        );
-
-        robot.telemetryData.addData("Heading", this.follower.pose().heading());
-        robot.telemetryData.addData("Drive - Forward", this.getForward());
-        robot.telemetryData.addData("Drive - Strafe", this.getStrafe());
-        robot.telemetryData.addData("Drive - Turn", this.getTurn());
-
-        follower.manual(powers);
+        follower.manual(forward, strafe, turn);
         follower.update();
-        mecanumDrive.driveRobotCentric(this.strafe, this.turn, this.forward);
     }
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
@@ -93,19 +64,45 @@ public class Drive extends SubsystemBase {
     }
 
 
-    public MotorEx getFrontRightMotor() {
+    public DcMotorEx getFrontRightMotor() {
         return frontRightMotor;
     }
 
-    public MotorEx getFrontLeftMotor() {
+    public DcMotorEx getFrontLeftMotor() {
         return frontLeftMotor;
     }
 
-    public MotorEx getBackLeftMotor() {
+    public DcMotorEx getBackLeftMotor() {
         return backLeftMotor;
     }
 
-    public MotorEx getBackRightMotor() {
+    public DcMotorEx getBackRightMotor() {
         return backRightMotor;
+    }
+
+    public Command driveRobotCentric(){
+        return Command.build()
+                .requiring(this)
+                .setExecute(() ->
+                {
+                    double forward = Bindings.getDriverLeftY().getAsDouble();
+                    double strafe = Bindings.getDriverLeftX().getAsDouble();
+                    double turn = Bindings.getDriverRightX().getAsDouble();
+                    double triggerValue = Bindings.getDriverRightTrigger().getAsDouble();
+                    double multiplier = (MINIMUM_SPEED + ((1 - MINIMUM_SPEED) * triggerValue));
+                    this.driveRobotCentric(forward * multiplier, strafe * multiplier, turn * multiplier);
+                });
+    }
+
+    public Command periodic(){
+        return Command.build()
+                .setExecute(() ->
+                {
+                    robot.telemetry.addData("Heading", this.follower.pose().heading());
+                    robot.telemetry.addData("Drive - Forward", this.getForward());
+                    robot.telemetry.addData("Drive - Strafe", this.getStrafe());
+                    robot.telemetry.addData("Drive - Turn", this.getTurn());
+                });
+
     }
 }
