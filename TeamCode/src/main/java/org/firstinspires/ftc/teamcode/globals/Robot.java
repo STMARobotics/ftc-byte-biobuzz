@@ -50,7 +50,7 @@ public class Robot {
             bindCommands();
         }
 
-        Scheduler.schedule(drive.periodic());
+        Scheduler.schedule(drive.periodic(), intake.periodic());
 
     }
 
