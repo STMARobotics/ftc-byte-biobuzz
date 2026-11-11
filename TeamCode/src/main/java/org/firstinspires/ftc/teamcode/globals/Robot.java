@@ -16,6 +16,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 
+import java.util.LinkedHashMap;
+
 
 public class Robot {
 
@@ -69,8 +71,10 @@ public class Robot {
         );
 
 
-        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.runIntake());
-        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.stopIntake());
+        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.doRunIntake());
+        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.doStop());
 
+        Bindings.getDriverLeftBumper().whenPressed(()-> intake.doVommit());
+        Bindings.getDriverLeftBumper().whenReleased(()-> intake.doVommit());
     }
 }
