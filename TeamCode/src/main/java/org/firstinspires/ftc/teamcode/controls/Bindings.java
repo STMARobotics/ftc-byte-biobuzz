@@ -1,90 +1,99 @@
 package org.firstinspires.ftc.teamcode.controls;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.seattlesolvers.solverslib.command.button.GamepadButton;
-import com.seattlesolvers.solverslib.command.button.Trigger;
-import com.seattlesolvers.solverslib.gamepad.GamepadEx;
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class Bindings {
 
-    GamepadEx driverGamepad;
-    GamepadEx operatorGamepad;
+    private final Gamepad driver;
+    private final Gamepad operator;
+    private final List<Button> buttons = new ArrayList<>();
 
     private static Bindings INSTANCE;
 
+    /** Call every OpMode init. Replaces the gamepads and clears old button bindings. */
     public static void init(Gamepad driverGamepad, Gamepad operatorGamepad) {
-        if (INSTANCE == null) {
-            INSTANCE = new Bindings(new GamepadEx(driverGamepad), new GamepadEx(operatorGamepad));
+        INSTANCE = new Bindings(driverGamepad, operatorGamepad);
+    }
+
+    private Bindings(Gamepad driver, Gamepad operator) {
+        this.driver = driver;
+        this.operator = operator;
+    }
+
+    /** Call once per loop, before Scheduler.execute(), so button bindings fire. */
+    public static void update() {
+        for (Button b : INSTANCE.buttons) {
+            b.update();
         }
     }
-    private Bindings(GamepadEx driverGamepad, GamepadEx operatorGamepad) {
-        this.driverGamepad = driverGamepad;
-        this.operatorGamepad = operatorGamepad;
+
+    private static Button button(BooleanSupplier input) {
+        Button b = new Button(input);
+        INSTANCE.buttons.add(b);
+        return b;
     }
 
-    public static GamepadButton getDriverOptionKey() {
-        return INSTANCE.driverGamepad.getGamepadButton(GamepadKeys.Button.OPTIONS);
+    // ---------------- Driver buttons ----------------
+
+    public static Button getDriverOptionKey() {
+        return button(() -> INSTANCE.driver.options);
     }
+
+    public static Button getDriverButtonA() {
+        return button(() -> INSTANCE.driver.a);
+    }
+
+    public static Button getDriverLeftBumper() {
+        return button(() -> INSTANCE.driver.left_bumper);
+    }
+
+    public static Button getDriverRightBumper() {
+        return button(() -> INSTANCE.driver.right_bumper);
+    }
+
+    // ---------------- Operator buttons ----------------
+
+    public static Button getOperatorButtonA() {
+        return button(() -> INSTANCE.operator.a);
+    }
+
+    public static Button getOperatorLeftBumper() {
+        return button(() -> INSTANCE.operator.left_bumper);
+    }
+
+    // ---------------- Sticks and triggers ----------------
 
     public static DoubleSupplier getDriverLeftX() {
-        return INSTANCE.driverGamepad::getLeftX;
+        return () -> INSTANCE.driver.left_stick_x;
     }
 
+    /** Inverted so pushing the stick up is positive (the SDK reports up as negative). */
     public static DoubleSupplier getDriverLeftY() {
-        return INSTANCE.driverGamepad::getLeftY;
+        return () -> -INSTANCE.driver.left_stick_y;
     }
 
     public static DoubleSupplier getDriverRightX() {
-        return INSTANCE.driverGamepad::getRightX;
+        return () -> INSTANCE.driver.right_stick_x;
     }
 
     public static DoubleSupplier getDriverRightTrigger() {
-        return () -> INSTANCE.driverGamepad.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        return () -> INSTANCE.driver.right_trigger;
     }
+
     public static DoubleSupplier getDriverLeftTrigger() {
-        return () -> INSTANCE.driverGamepad.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        return () -> INSTANCE.driver.left_trigger;
     }
 
-    public static GamepadButton getOperatorButtonA(){
-        return INSTANCE.operatorGamepad.getGamepadButton(GamepadKeys.Button.A);
+    public static DoubleSupplier getOperatorLeftTrigger() {
+        return () -> INSTANCE.operator.left_trigger;
     }
 
-    public static GamepadButton getDriverButtonA(){
-        return INSTANCE.operatorGamepad.getGamepadButton(GamepadKeys.Button.A);
-    }
-
-    public static Trigger getOperatorLeftTrigger(){
-        return new Trigger(() -> {
-            double value = INSTANCE.operatorGamepad.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
-            return value > .01 || value < -.01;
-        });
-    }
-
-    public static Trigger getOperatorRightTrigger(){
-        return new Trigger(() -> {
-            double value = INSTANCE.operatorGamepad.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
-            return value > .01 || value < -.01;
-        });
-    }
-    public static GamepadButton getOperatorLeftBumper(){
-        return INSTANCE.operatorGamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER);
-    }
-    public static GamepadButton getDriverLeftBumper(){
-        return INSTANCE.operatorGamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER);
-    }
-
-    public static GamepadButton getDriverRightBumper(){
-        return INSTANCE.operatorGamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER);
-    }
-
-    public static GamepadEx getDriverGamepad() {
-        return INSTANCE.driverGamepad;
-    }
-
-    public static GamepadEx getOperatorGamepad() {
-        return INSTANCE.operatorGamepad;
+    public static DoubleSupplier getOperatorRightTrigger() {
+        return () -> INSTANCE.operator.right_trigger;
     }
 }
