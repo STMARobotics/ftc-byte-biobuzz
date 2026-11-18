@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
+import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
 
 import com.pedropathing.follower.Follower;
@@ -53,24 +54,11 @@ public class Robot {
         }
 
         Scheduler.schedule(drive.periodic(), intake.periodic());
-
     }
 
 
     public void bindCommands() {
-//        bindings.getDriverOptionKey().whenPressed(
-//                new InstantCommand(() -> {
-//                    imu.resetYaw();
-//                }));
-
-        DriverControlCommand dcc = new DriverControlCommand(drive,
-                Bindings.getDriverLeftY(),
-                Bindings.getDriverLeftX(),
-                Bindings.getDriverRightX(),
-                Bindings.getDriverRightTrigger()
-        );
-
-
+        schedule(Robot.getInstance().drive.driveRobotCentric());
         Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
         Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
     }

@@ -6,6 +6,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.controls.Bindings;
@@ -104,5 +105,22 @@ public class Drive  {
                     robot.telemetry.addData("Drive - Turn", this.getTurn());
                 });
 
+    }
+
+    public Command driveForward(double driveTimeSeconds, double driveSpeed){
+        ElapsedTime timer;
+        timer = new ElapsedTime();
+        timer.reset();
+        Command.build()
+                .setExecute(() ->
+                {
+                    this.driveRobotCentric(driveSpeed,0,0);
+                })
+                .setDone(() -> {
+                    return timer.seconds() >= driveTimeSeconds;.
+                })
+                .setEnd(endCondition -> {
+                    this.stop();
+                }).requiring(this);
     }
 }
