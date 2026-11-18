@@ -71,10 +71,7 @@ public class Robot {
         );
 
 
-        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.doRunIntake());
-        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.doStop());
-
-        Bindings.getDriverLeftBumper().whenPressed(()-> intake.doVommit());
-        Bindings.getDriverLeftBumper().whenReleased(()-> intake.doVommit());
+        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
+        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
     }
 }

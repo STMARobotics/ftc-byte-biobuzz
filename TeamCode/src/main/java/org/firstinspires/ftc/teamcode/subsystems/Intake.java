@@ -35,16 +35,16 @@ public class Intake  {
 
     }
 
-    public void doVommit(){
-        instant(this::vomit).requiring(this);
+    public Command doVommit(){
+        return instant(this::vomit).requiring(this);
     }
 
-    public void doStop(){
-        instant(this::stopIntake).requiring(this);
+    public Command doStop(){
+        return instant(this::stopIntake).requiring(this);
     }
 
-    public void doRunIntake(){
-        instant(this::runIntake).requiring(this);
+    public Command doRunIntake(){
+        return instant(this::runIntake).requiring(this);
     }
     public Command periodic () {
         return Command.build()
@@ -53,7 +53,5 @@ public class Intake  {
                     Robot.getInstance().telemetry.addData("Intake State", intakeState);
                 });
     }
-
-
 }
 
