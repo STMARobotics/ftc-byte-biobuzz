@@ -111,13 +111,13 @@ public class Drive  {
         ElapsedTime timer;
         timer = new ElapsedTime();
         timer.reset();
-        Command.build()
+        return Command.build()
                 .setExecute(() ->
                 {
                     this.driveRobotCentric(driveSpeed,0,0);
                 })
                 .setDone(() -> {
-                    return timer.seconds() >= driveTimeSeconds;.
+                    return timer.seconds() >= driveTimeSeconds;
                 })
                 .setEnd(endCondition -> {
                     this.stop();

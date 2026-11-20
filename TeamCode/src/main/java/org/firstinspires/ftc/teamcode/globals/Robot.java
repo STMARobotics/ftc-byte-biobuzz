@@ -3,8 +3,11 @@ package org.firstinspires.ftc.teamcode.globals;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
+import static com.pedropathing.ivy.commands.Commands.waitUntil;
+import static com.pedropathing.ivy.groups.Groups.sequential;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -15,7 +18,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.controls.Bindings;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
+import org.firstinspires.ftc.teamcode.subsystems.Gate;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 import java.util.LinkedHashMap;
 
@@ -32,6 +37,8 @@ public class Robot {
     public Drive drive;
     public SparkFunOTOS otos;
     private Intake intake;
+    private Gate gate;
+    private Shooter shooter;
 
 
     public static Robot getInstance() {
@@ -48,6 +55,9 @@ public class Robot {
         Follower follower = org.firstinspires.ftc.teamcode.pedroPathing.Constants.create(hwMap);
         this.drive = new Drive(hwMap, follower);
         this.intake = new Intake(hwMap);
+        this.gate = new Gate(hwMap,telemetry);
+        this.shooter = new Shooter(hwMap);
+
 
         if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
             bindCommands();
@@ -61,5 +71,17 @@ public class Robot {
         schedule(Robot.getInstance().drive.driveRobotCentric());
         Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
         Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
+    }
+
+    private Command shoot(){
+        this.limelight
+        sequential(
+                this.shooter.spinUpCommand(1500),
+                waitUntil(() -> this.shooter.isFlywheelReady())
+                // get trajectory again
+                // set turret angle and flywheel again
+                // wiat until in spot
+                // shoot
+        )
     }
 }
