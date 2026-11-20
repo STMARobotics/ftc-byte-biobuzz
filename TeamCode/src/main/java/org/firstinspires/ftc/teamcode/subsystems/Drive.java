@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.globals.Robot;
 
 import java.util.function.DoubleSupplier;
 
-public class Drive  {
+public class Drive {
 
     private final Robot robot = Robot.getInstance();
     private final Follower follower;
@@ -23,6 +23,7 @@ public class Drive  {
     public double getForward() {
         return forward;
     }
+
     public double getStrafe() {
         return strafe;
     }
@@ -40,7 +41,7 @@ public class Drive  {
     private DcMotorEx backLeftMotor;
     private DcMotorEx backRightMotor;
 
-    public Drive(HardwareMap hwMap, Follower follower){
+    public Drive(HardwareMap hwMap, Follower follower) {
         this.follower = follower;
         this.frontRightMotor = hwMap.get(DcMotorEx.class, FRONT_RIGHT_MOTOR);
         this.frontLeftMotor = hwMap.get(DcMotorEx.class, FRONT_LEFT_MOTOR);
@@ -56,12 +57,13 @@ public class Drive  {
         follower.manual(forward, strafe, turn);
         follower.update();
     }
+
     public void telemetry(Telemetry telemetry) {
         // Log the position to the telemetry
     }
 
     public void stop() {
-        this.driveRobotCentric(0,0,0);
+        this.driveRobotCentric(0, 0, 0);
     }
 
 
@@ -81,7 +83,7 @@ public class Drive  {
         return backRightMotor;
     }
 
-    public Command driveRobotCentric(){
+    public Command driveRobotCentric() {
         return Command.build()
                 .requiring(this)
                 .setExecute(() ->
@@ -95,7 +97,7 @@ public class Drive  {
                 });
     }
 
-    public Command periodic(){
+    public Command periodic() {
         return Command.build()
                 .setExecute(() ->
                 {
@@ -107,20 +109,21 @@ public class Drive  {
 
     }
 
-    public Command driveForward(double driveTimeSeconds, double driveSpeed){
+    public Command driveForward(double driveTimeSeconds, double driveSpeed) {
         ElapsedTime timer;
         timer = new ElapsedTime();
         timer.reset();
         Command.build()
                 .setExecute(() ->
                 {
-                    this.driveRobotCentric(driveSpeed,0,0);
+                    this.driveRobotCentric(driveSpeed, 0, 0);
                 })
                 .setDone(() -> {
-                    return timer.seconds() >= driveTimeSeconds;.
+                    return timer.seconds() >= driveTimeSeconds;
                 })
                 .setEnd(endCondition -> {
                     this.stop();
                 }).requiring(this);
+        return null;
     }
 }
