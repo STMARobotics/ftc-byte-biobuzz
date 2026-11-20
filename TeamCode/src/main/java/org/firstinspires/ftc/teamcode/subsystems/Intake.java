@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static com.pedropathing.ivy.commands.Commands.instant;
+import static org.firstinspires.ftc.teamcode.globals.Constants.INTAKE_SPEED;
+import static org.firstinspires.ftc.teamcode.globals.Constants.INTAKE_STOP;
 
 import com.pedropathing.ivy.Command;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -35,17 +37,6 @@ public class Intake  {
 
     }
 
-    public Command doVommit(){
-        return instant(this::vomit).requiring(this);
-    }
-
-    public Command doStop(){
-        return instant(this::stopIntake).requiring(this);
-    }
-
-    public Command doRunIntake(){
-        return instant(this::runIntake).requiring(this);
-    }
     public Command periodic () {
         return Command.build()
                 .setExecute(() ->
@@ -53,5 +44,7 @@ public class Intake  {
                     Robot.getInstance().telemetry.addData("Intake State", intakeState);
                 });
     }
+
+
 }
 

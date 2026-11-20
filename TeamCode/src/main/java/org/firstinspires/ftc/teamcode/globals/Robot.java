@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
-import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
 
 import com.pedropathing.follower.Follower;
@@ -16,8 +15,6 @@ import org.firstinspires.ftc.teamcode.controls.Bindings;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
-
-import java.util.LinkedHashMap;
 
 
 public class Robot {
@@ -54,12 +51,26 @@ public class Robot {
         }
 
         Scheduler.schedule(drive.periodic(), intake.periodic());
+
     }
 
 
     public void bindCommands() {
-        schedule(Robot.getInstance().drive.driveRobotCentric());
-        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
-        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
+//        bindings.getDriverOptionKey().whenPressed(
+//                new InstantCommand(() -> {
+//                    imu.resetYaw();
+//                }));
+
+        DriverControlCommand dcc = new DriverControlCommand(drive,
+                Bindings.getDriverLeftY(),
+                Bindings.getDriverLeftX(),
+                Bindings.getDriverRightX(),
+                Bindings.getDriverRightTrigger()
+        );
+
+
+        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.runIntake());
+        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.stopIntake());
+
     }
 }

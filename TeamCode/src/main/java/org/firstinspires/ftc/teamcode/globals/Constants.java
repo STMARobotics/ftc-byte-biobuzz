@@ -35,7 +35,7 @@ public class Constants {
     public static final int BLUE_PIPELINE = 0;
     public static final int RED_PIPELINE = 1;
 
-//    turret constants
+    //    turret constants
     public static final double TURRET_KP = 0.00;// made up num
     public static final double TURRET_KD = 0.000;// made up num
     public static final double TURRET_MAX_POWER = 0.60;// made up num
@@ -43,17 +43,21 @@ public class Constants {
     public static final int TURRET_HOME =  0;//made up num
     public static final int HOOD_HOME = 0;//made up num,
 
-//  Gate constants
+    //  Gate constants
     public static final int GATE_OPEN = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int GATE_CLOSED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
-//   kicker constants
+    //   kicker constants
     public static final int KICKER_ON_FLOOR = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
     public static final int KICKER_STORED = 0; //DO NOT RUN THIS THE NUMBER IS COMPLETLY MADE UP
 
+    // Intake
+    public static final int INTAKE_SPEED = 0;
+    public static final int INTAKE_STOP = 0;
 
 
- //math
+
+    //math
     public static final double linearDistance = 28;//this is the circumference of the flywheel will need to double check
     public static final double time = 60; //seconds in a min
 }

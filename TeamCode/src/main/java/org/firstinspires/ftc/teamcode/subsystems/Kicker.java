@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static com.pedropathing.ivy.commands.Commands.instant;
 import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
+import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
@@ -21,5 +23,14 @@ public class Kicker {
     }
     public void store(){
         kicker.set(KICKER_STORED);//add value to constants later
+    }
+
+    public Command kickerOnFloorCommand (){
+        return instant(this::down).requiring(this);
+
+    }
+
+    public Command kickerStoredCommand (){
+        return instant(this::store).requiring(this);
     }
 }
