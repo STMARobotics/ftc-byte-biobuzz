@@ -47,19 +47,21 @@ public class Robot {
 //        this.otos = (SparkFunOTOS) hwMap.get("Spark");
         Follower follower = org.firstinspires.ftc.teamcode.pedroPathing.Constants.create(hwMap);
         this.drive = new Drive(hwMap, follower);
+/*
         this.intake = new Intake(hwMap);
+*/
 
         if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
             bindCommands();
         }
 
-        Scheduler.schedule(drive.periodic(), intake.periodic());
+        Scheduler.schedule(drive.periodic()/*, intake.periodic()*/);
     }
 
 
     public void bindCommands() {
         schedule(Robot.getInstance().drive.driveRobotCentric());
-        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
-        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
+//        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
+//        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
     }
 }

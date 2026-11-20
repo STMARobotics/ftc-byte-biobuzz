@@ -10,48 +10,48 @@ import org.firstinspires.ftc.teamcode.globals.Robot;
 
 // Give the intake the motor that powers it 
 public class Intake  {
-    private final Motor intake;
-    private String intakeState = "stopped";
-
-    public Intake (HardwareMap hardwareMap) {
-        intake = new Motor(hardwareMap, "INTAKE_MOTOR");
-        intake.setInverted(true);
-
-    }
-    // This runs the intake.
-    public void runIntake() {
-        intake.set(INTAKE_SPEED);
-
-    }
-    // Reverse the intake so it spits out polllen.
-    public void vomit() {
-        intake.set(-INTAKE_SPEED);
-
-    }
-    // Fully stops the intake
-    public void stopIntake() {
-        intake.set(INTAKE_STOP);
-        this.intakeState = "stopped";
-
-    }
-
-    public Command doVommit(){
-        return instant(this::vomit).requiring(this);
-    }
-
-    public Command doStop(){
-        return instant(this::stopIntake).requiring(this);
-    }
-
-    public Command doRunIntake(){
-        return instant(this::runIntake).requiring(this);
-    }
-    public Command periodic () {
-        return Command.build()
-                .setExecute(() ->
-                {
-                    Robot.getInstance().telemetry.addData("Intake State", intakeState);
-                });
-    }
+//    private final Motor intake;
+//    private String intakeState = "stopped";
+//
+//    public Intake (HardwareMap hardwareMap) {
+//        intake = new Motor(hardwareMap, "INTAKE_MOTOR");
+//        intake.setInverted(true);
+//
+//    }
+//    // This runs the intake.
+//    public void runIntake() {
+//        intake.set(INTAKE_SPEED);
+//
+//    }
+//    // Reverse the intake so it spits out polllen.
+//    public void vomit() {
+//        intake.set(-INTAKE_SPEED);
+//
+//    }
+//    // Fully stops the intake
+//    public void stopIntake() {
+//        intake.set(INTAKE_STOP);
+//        this.intakeState = "stopped";
+//
+//    }
+//
+//    public Command doVommit(){
+//        return instant(this::vomit).requiring(this);
+//    }
+//
+//    public Command doStop(){
+//        return instant(this::stopIntake).requiring(this);
+//    }
+//
+//    public Command doRunIntake(){
+//        return instant(this::runIntake).requiring(this);
+//    }
+//    public Command periodic () {
+//        return Command.build()
+//                .setExecute(() ->
+//                {
+//                    Robot.getInstance().telemetry.addData("Intake State", intakeState);
+//                });
+//    }
 }
 
