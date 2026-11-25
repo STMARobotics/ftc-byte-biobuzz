@@ -11,29 +11,29 @@ import org.firstinspires.ftc.teamcode.globals.Constants;
 import org.firstinspires.ftc.teamcode.globals.Robot;
 
 @TeleOp(name = "DriverControlled")
-public class DriverControlledOpMode extends CommandOpMode {
-
-    public GamepadEx driverGamepad;
-    public GamepadEx operatorGamepad;
-
-    private final Robot robot = Robot.getInstance();
-
-    @Override
-    public void initialize() {
-        // Must have for all opModes
-        Constants.OP_MODE_TYPE = Constants.OpModeType.TELEOP;
-
-        // Resets the command scheduler
-        super.reset();
-
-        // Initialize the robot (which also registers subsystems, configures CommandScheduler, etc.)
-        robot.init(this);
-    }
-
-    @Override
-    public void run() {
-        // DO NOT REMOVE ANY LINES BELOW! Runs the command scheduler and updates telemetry
-        super.run();
-        robot.telemetryData.update();
-    }
+public class DriverControlledOpMode  {
+//
+//    public GamepadEx driverGamepad;
+//    public GamepadEx operatorGamepad;
+//
+//    private final Robot robot = Robot.getInstance();
+//
+//    @Override
+//    public void initialize() {
+//        // Must have for all opModes
+//        Constants.OP_MODE_TYPE = Constants.OpModeType.TELEOP;
+//
+//        // Resets the command scheduler
+//        super.reset();
+//
+//        // Initialize the robot (which also registers subsystems, configures CommandScheduler, etc.)
+//        robot.init(this);
+//    }
+//
+//    @Override
+//    public void run() {
+//        // DO NOT REMOVE ANY LINES BELOW! Runs the command scheduler and updates telemetry
+//        super.run();
+//        robot.telemetryData.update();
+//    }
 }
