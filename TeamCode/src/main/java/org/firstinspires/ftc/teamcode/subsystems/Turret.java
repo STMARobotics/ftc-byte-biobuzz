@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static com.pedropathing.ivy.commands.Commands.instant;
 import static org.firstinspires.ftc.teamcode.globals.Constants.*;
 
 import androidx.core.math.MathUtils;
 
+import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.controller.PIDController;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
@@ -13,7 +14,7 @@ import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Turret extends SubsystemBase {
+public class Turret {
 private final MotorEx turretMotor;
 private final ServoEx hoodServo;
 private final Limelight limelight;
@@ -64,7 +65,7 @@ public boolean isLockedOn(double thresholdDeg){
     }
     return Math.abs(tx) <= thresholdDeg;
  }
- //i actully dont know what this does will prob figure out later
+ //i actually don't know what this does will prob figure out later
 public boolean isLockedOn(){
     return isLockedOn(DEAD_BAND_DEG);//will need to figure out what this is
 }
@@ -76,4 +77,8 @@ public void telemetry(Telemetry telemetry){
     telemetry.addData("Turret Applied Power", lastAppliedPower);
     telemetry.addData("Hood Servo Position", hoodServo.getRawPosition());
 }
+public Command stopCommand(){
+    return  instant(this::stopTurret).requiring(this);
+}
+
 }
