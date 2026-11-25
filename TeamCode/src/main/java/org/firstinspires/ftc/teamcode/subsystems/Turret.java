@@ -10,13 +10,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.controller.PIDController;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
-import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Turret {
 private final MotorEx turretMotor;
-private final ServoEx hoodServo;
 private final Limelight limelight;
 
 private double lastAppliedPower = 0.0;//i have no idea what this does yet
@@ -25,7 +23,6 @@ private final PIDController pidController = new PIDController(TURRET_KP,0.0,TURR
 
 public Turret(HardwareMap hardwareMap){
     this.turretMotor = new MotorEx(hardwareMap, TURRET_MOTOR);
-    this.hoodServo = new ServoEx(hardwareMap, HOOD_SERVO);
     limelight = new Limelight(hardwareMap);
     turretMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 }
@@ -69,16 +66,11 @@ public boolean isLockedOn(double thresholdDeg){
 public boolean isLockedOn(){
     return isLockedOn(DEAD_BAND_DEG);//will need to figure out what this is
 }
-//brings the hood back to 0
-public void hoodToHome(){
-    hoodServo.set(HOOD_HOME);//random num
-}
 public void telemetry(Telemetry telemetry){
     telemetry.addData("Turret Applied Power", lastAppliedPower);
-    telemetry.addData("Hood Servo Position", hoodServo.getRawPosition());
 }
-public Command stopCommand(){
-    return  instant(this::stopTurret).requiring(this);
+public Command moveToHomeCommand(){
+    return  instant(this::goToHome).requiring(this);
 }
 
 }
