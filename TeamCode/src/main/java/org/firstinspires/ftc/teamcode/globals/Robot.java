@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.controls.Bindings;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commands.DriverControlCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.Kicker;
 
 
 public class Robot {
@@ -30,6 +31,7 @@ public class Robot {
     public Drive drive;
     public SparkFunOTOS otos;
     private Intake intake;
+    private Kicker kicker;
 
 
     public static Robot getInstance() {
@@ -64,7 +66,8 @@ public class Robot {
 //                }));
 
         schedule(Robot.getInstance().drive.driveRobotCentric());
-//        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
-//        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
+        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
+        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
+        Bindings.getOperatorButtonA().toggleWhenPressed(this.kicker.kickerOnFloorCommand(), this.kicker.kickerStoredCommand());
     }
 }
