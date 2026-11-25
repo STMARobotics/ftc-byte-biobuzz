@@ -13,7 +13,7 @@ import com.seattlesolvers.solverslib.hardware.servos.ServoEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Turret extends SubsystemBase {
+public class Turret {
 private final MotorEx turretMotor;
 private final ServoEx hoodServo;
 private final Limelight limelight;

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.SerialNumber;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
-public class Limelight extends SubsystemBase {
+public class Limelight  {
     private final Limelight3A limelight;
 
     public Limelight(HardwareMap hardwareMap){

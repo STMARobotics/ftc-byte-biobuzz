@@ -90,7 +90,7 @@ public class Drive {
                 {
                     double forward = Bindings.getDriverLeftY().getAsDouble();
                     double strafe = Bindings.getDriverLeftX().getAsDouble();
-                    double turn = Bindings.getDriverRightX().getAsDouble();
+                    double turn = -1 * Bindings.getDriverRightX().getAsDouble();
                     double triggerValue = Bindings.getDriverRightTrigger().getAsDouble();
                     double multiplier = (MINIMUM_SPEED + ((1 - MINIMUM_SPEED) * triggerValue));
                     this.driveRobotCentric(forward * multiplier, strafe * multiplier, turn * multiplier);
@@ -105,6 +105,10 @@ public class Drive {
                     robot.telemetry.addData("Drive - Forward", this.getForward());
                     robot.telemetry.addData("Drive - Strafe", this.getStrafe());
                     robot.telemetry.addData("Drive - Turn", this.getTurn());
+                    robot.telemetry.addData("Right Front Motor",  this.frontRightMotor.getPower() + " : " + this.frontRightMotor.getDirection().toString());
+                    robot.telemetry.addData("Left Front Motor",  this.frontLeftMotor.getPower() + " : " + this.frontLeftMotor.getDirection().toString());
+                    robot.telemetry.addData("Right Back Motor",  this.backRightMotor.getPower() + " : " + this.backRightMotor.getDirection().toString());
+                    robot.telemetry.addData("Left Back Motor",  this.backLeftMotor.getPower() + " : " + this.backLeftMotor.getDirection().toString());
                 });
 
     }
@@ -113,7 +117,7 @@ public class Drive {
         ElapsedTime timer;
         timer = new ElapsedTime();
         timer.reset();
-        Command.build()
+        return Command.build()
                 .setExecute(() ->
                 {
                     this.driveRobotCentric(driveSpeed, 0, 0);

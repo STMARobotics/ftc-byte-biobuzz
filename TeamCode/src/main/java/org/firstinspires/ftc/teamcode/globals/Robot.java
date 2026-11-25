@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.globals;
 
 
+import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
 
 import com.pedropathing.follower.Follower;
@@ -44,14 +45,15 @@ public class Robot {
 //        this.otos = (SparkFunOTOS) hwMap.get("Spark");
         Follower follower = org.firstinspires.ftc.teamcode.pedroPathing.Constants.create(hwMap);
         this.drive = new Drive(hwMap, follower);
+/*
         this.intake = new Intake(hwMap);
+*/
 
         if (Constants.OP_MODE_TYPE == Constants.OpModeType.TELEOP) {
             bindCommands();
         }
 
-        Scheduler.schedule(drive.periodic(), intake.periodic());
-
+        schedule(drive.periodic(), intake.periodic());
     }
 
 
@@ -61,16 +63,8 @@ public class Robot {
 //                    imu.resetYaw();
 //                }));
 
-        DriverControlCommand dcc = new DriverControlCommand(drive,
-                Bindings.getDriverLeftY(),
-                Bindings.getDriverLeftX(),
-                Bindings.getDriverRightX(),
-                Bindings.getDriverRightTrigger()
-        );
-
-
-        Bindings.getDriverRightBumper().whenPressed(()-> this.intake.runIntake());
-        Bindings.getDriverRightBumper().whenReleased(()-> this.intake.stopIntake());
-
+        schedule(Robot.getInstance().drive.driveRobotCentric());
+//        Bindings.getDriverRightBumper().toggleWhenPressed(this.intake.doRunIntake(), this.intake.doStop());
+//        Bindings.getDriverLeftBumper().toggleWhenPressed(intake.doVommit(), intake.doStop());
     }
 }
